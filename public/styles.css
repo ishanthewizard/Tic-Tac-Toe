@@ -1,0 +1,14 @@
+.header {
+  height: 300px;
+}
+
+.board {
+  width: 800px;
+  height: 800px;
+  margin: auto;
+}
+
+.tile {
+  margin: 9px;
+  border-radius: 10%;
+}
