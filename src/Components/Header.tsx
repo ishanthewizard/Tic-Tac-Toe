@@ -1,8 +1,19 @@
 import * as React from 'react';
+import {Heading, Center} from '@chakra-ui/react'
 
 function Header() {
     return (
-        <h1 className = "header">This should be the score</h1>
+        <Heading className = "header">
+            <Center>
+            this should be the score
+            </Center>
+            
+            <Center>
+            this should be the score
+            </Center>
+
+            
+        </Heading>
     )
 }
 
