@@ -1,15 +1,18 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {Square, Text} from '@chakra-ui/react';
 
-interface Props {
-    num: number;
-}
 
-function Tile({num}: Props) {
-    console.log(num)
+
+function Tile(props: any) {
+
+    const [color, setColor] = useState<string>("#626887")
     return (
-        <Square bg='#626887' size='220px' className = "tile">
-                <Text>Box 2</Text>
+        <Square onMouseDown={() =>(setColor('gray'))}
+        onMouseUp = {() =>(setColor('#626887'))}
+        onClick = {() => {
+            props.update(props.num)
+            } } bg = {color} size='220px' className = "tile">
+                <Text className = "marks">{props.mark}</Text>
         </Square>
     )
 }
