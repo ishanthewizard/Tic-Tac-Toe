@@ -16,12 +16,21 @@ function arrayEquals(a: number[], b: number[]) {
     return false
   }
 
+
   
 function Board(props: any) {
     
     
     const [mark, setMark] = useState<string[]>(["","","","","","","","",""])
-
+    function changeHeaderColor() {
+        if (props.player === "X") {
+            props.setHeadColor('#c08de9')
+        } else if (props.player === "O") {
+            props.setHeadColor('#517ae4')
+        } else {
+            props.setHeadColor('white')
+        }
+    }
     function checkWinner(newArr: string[]) {
         const result: number[] = [];
         for (let i = 0; i < mark.length; i++) {
@@ -32,27 +41,44 @@ function Board(props: any) {
         const winners: number[][] = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
         for (const winner of winners) {
             if (arrayEquals(winner, result)) {
-                props.setWhoWon("Player " + (props.player === "X"? 1:2) +  " won")
-                return true;
+                changeHeaderColor()
+                props.setWhoWon("Player " + (props.player === "X"? 1:2) +  " Won!")
+                return 1;
                 
             }
         }
-        return false;
+        let tie = true;
+        for (const item of newArr) {
+            if (item === "") {
+                tie = false;
+                break;
+            }
+        }
+        if (tie) {
+            props.setWhoWon("It was a tie!")
+            props.setPlayer("/")
+            return -1;
+        }
+        return 0;
     }
 
     function updateMark(num: number) {
         const newArr = [...mark]
-        if (mark[num] === "") {
-            newArr[num] = props.player
-            setMark(newArr)
+        if (mark[num] != "") {
+            return;
         }
-        if (checkWinner(newArr)) {
+        newArr[num] = props.player
+        setMark(newArr)
+        const winner = checkWinner(newArr);
+        if (winner) {
+            console.log(winner);
             setTimeout(()=>{
                 props.setWon(true);
                 setMark(["","","","","","","","",""])
-            if (props.player === "X") {
+            
+            if (props.player === "X" && winner === 1) {
                 props.setP1Score(props.p1Score + 1)
-            } else {
+            } else if (props.player === "O" && winner === 1) {
                 props.setP2Score(props.p2Score + 1)
             }
             props.setPlayer("X")

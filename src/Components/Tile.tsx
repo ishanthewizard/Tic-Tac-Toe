@@ -12,7 +12,7 @@ function Tile(props: any) {
         onClick = {() => {
             props.update(props.num)
             } } bg = {color} size='220px' className = "tile">
-                <Text className = "marks">{props.mark}</Text>
+                <Text className = "marks" color = {props.mark === "X"? '#c08de9': '#517ae4' }>{props.mark}</Text>
         </Square>
     )
 }
