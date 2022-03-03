@@ -3,17 +3,15 @@ import {Box, Flex} from '@chakra-ui/react';
 import Tile from './Tile'
 function arrayEquals(a: number[], b: number[]) {
     let total = 0;
-    for(const aItem of a) {
-        for(const bItem of b) {
-            if (aItem=== bItem) {
-                total += 1;
-            }
-        }
-    }
+    a.forEach((aItem) => {
+        b.forEach((bItem) => {
+             (aItem === bItem? total += 1:null)
+        })
+    })
     if (total >= 3) {
-        return true
+        return true;
     }
-    return false
+    return false;
   }
 
 
@@ -73,13 +71,13 @@ function Board(props: any) {
         if (winner) {
             console.log(winner);
             setTimeout(()=>{
-                props.setWon(true);
+                props.setgameFinished(true);
                 setMark(["","","","","","","","",""])
             
             if (props.player === "X" && winner === 1) {
-                props.setP1Score(props.p1Score + 1)
+                props.setScore({x:props.score.x + 1, o: props.score.o})
             } else if (props.player === "O" && winner === 1) {
-                props.setP2Score(props.p2Score + 1)
+                props.setScore({x: props.score.x, o: props.score.o + 1})
             }
             props.setPlayer("X")
         }, 500)
