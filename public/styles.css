@@ -12,10 +12,16 @@
 .tile {
   margin: 9px;
   border-radius: 10%;
+  background-color: 'gray';
+  /* background-color: '#626887'; */
 }
 
 .tile:hover {
   cursor: pointer;
+}
+
+.tile:active {
+  background-color: 'gray';
 }
 
 .marks {

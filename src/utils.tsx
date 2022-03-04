@@ -34,3 +34,17 @@ export function useLocalStorage(storageKey: string) {
     
     return [storedValue, setValue]
   }
+
+  export function arrayEquals(a: number[], b: number[]) {
+    let total = 0;
+    a.forEach((aItem) => {
+        b.forEach((bItem) => {
+             (aItem === bItem? total += 1:null)
+        })
+    })
+    if (total >= 3) {
+        return true;
+    }
+    return false;
+  }
+

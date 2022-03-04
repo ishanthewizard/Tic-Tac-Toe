@@ -1,19 +1,7 @@
 import React, {useState} from 'react';
 import {Box, Flex} from '@chakra-ui/react';
+import {arrayEquals} from '../utils'
 import Tile from './Tile'
-function arrayEquals(a: number[], b: number[]) {
-    let total = 0;
-    a.forEach((aItem) => {
-        b.forEach((bItem) => {
-             (aItem === bItem? total += 1:null)
-        })
-    })
-    if (total >= 3) {
-        return true;
-    }
-    return false;
-  }
-
 
   
 function Board(props: any) {
@@ -69,7 +57,6 @@ function Board(props: any) {
         setMark(newArr)
         const winner = checkWinner(newArr);
         if (winner) {
-            console.log(winner);
             setTimeout(()=>{
                 props.setgameFinished(true);
                 setMark(["","","","","","","","",""])
@@ -89,7 +76,6 @@ function Board(props: any) {
         
     }
 
-
     function genTiles(n : number) {
         const result : (JSX.Element)[] = [];
         for(let i = 0; i < n; i++) {
@@ -97,6 +83,9 @@ function Board(props: any) {
         }
         return result;
     }
+
+
+
     const tileArray: (JSX.Element)[] = genTiles(9);
     return (
         <Box className = "board">
